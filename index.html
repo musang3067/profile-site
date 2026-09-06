@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tom | 차량 아키텍처 플랫폼 PM</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --grad-1:#3b82f6; /* blue-500 */
+    --grad-2:#8b5cf6; /* violet-500 */
+    --grad-3:#10b981; /* emerald-500 */
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;}
+  ::selection{background:var(--grad-2);color:#fff;}
+
+  .gradient-text{
+    background:linear-gradient(90deg,var(--grad-1),var(--grad-2),var(--grad-3));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    background-size:200% auto;
+    animation:shine 6s linear infinite;
+  }
+  @keyframes shine{to{background-position:200% center;}}
+
+  .gradient-btn{
+    background:linear-gradient(90deg,var(--grad-1),var(--grad-2),var(--grad-3));
+    background-size:200% auto;
+    transition:background-position .5s ease, transform .2s ease;
+  }
+  .gradient-btn:hover{background-position:100% center; transform:translateY(-2px);}
+
+  .hero-bg{
+    position:absolute; inset:0; overflow:hidden; z-index:-1;
+  }
+  .blob{
+    position:absolute; border-radius:9999px; filter:blur(80px); opacity:.55;
+    animation:float 12s ease-in-out infinite;
+  }
+  .blob1{width:420px;height:420px; background:var(--grad-1); top:-100px; left:-100px;}
+  .blob2{width:380px;height:380px; background:var(--grad-2); bottom:-120px; right:-80px; animation-delay:2s;}
+  .blob3{width:300px;height:300px; background:var(--grad-3); top:40%; left:50%; animation-delay:4s;}
+  @keyframes float{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(30px,-30px) scale(1.08);}
+  }
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.show{opacity:1; transform:translateY(0);}
+
+  .timeline-line{
+    background:linear-gradient(180deg,var(--grad-1),var(--grad-2),var(--grad-3));
+  }
+
+  .card-hover{transition:transform .3s ease, box-shadow .3s ease;}
+  .card-hover:hover{transform:translateY(-6px);}
+
+  .nav-link{position:relative;}
+  .nav-link::after{
+    content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px;
+    background:linear-gradient(90deg,var(--grad-1),var(--grad-2),var(--grad-3));
+    transition:width .3s ease;
+  }
+  .nav-link:hover::after{width:100%;}
+
+  #mobile-menu{transition:max-height .35s ease, opacity .3s ease;}
+</style>
+</head>
+<body class="bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
+
+<!-- Navigation -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-white/70 dark:bg-slate-950/70 border-b border-slate-200/60 dark:border-slate-800/60">
+  <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#home" class="text-2xl font-bold gradient-text">Tom</a>
+
+    <ul class="hidden md:flex items-center gap-8 text-lg font-medium">
+      <li><a href="#about" class="nav-link">소개</a></li>
+      <li><a href="#career" class="nav-link">경력</a></li>
+      <li><a href="#projects" class="nav-link">프로젝트</a></li>
+      <li><a href="#expertise" class="nav-link">전문분야</a></li>
+      <li><a href="#contact" class="nav-link">연락처</a></li>
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <button id="theme-toggle" aria-label="테마 전환" class="p-2 rounded-full border border-slate-300 dark:border-slate-700 hover:border-transparent hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        <svg id="icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.36 6.36l-.7-.7M6.34 6.34l-.7-.7m12.72 0l-.7.7M6.34 17.66l-.7.7M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <svg id="icon-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+      </button>
+      <button id="menu-btn" class="md:hidden p-2 rounded-full border border-slate-300 dark:border-slate-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <ul id="mobile-menu" class="md:hidden max-h-0 opacity-0 overflow-hidden flex flex-col gap-1 px-6 pb-2 text-sm font-medium bg-white/90 dark:bg-slate-950/90">
+    <li><a href="#about" class="block py-2">소개</a></li>
+    <li><a href="#career" class="block py-2">경력</a></li>
+    <li><a href="#projects" class="block py-2">프로젝트</a></li>
+    <li><a href="#expertise" class="block py-2">전문분야</a></li>
+    <li><a href="#contact" class="block py-2">연락처</a></li>
+  </ul>
+</header>
+
+<!-- Hero -->
+<section id="home" class="relative min-h-screen flex items-center justify-center pt-24 px-6 bg-slate-50 dark:bg-slate-900">
+  <div class="hero-bg">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+  </div>
+
+  <div class="text-center max-w-3xl">
+    <p class="text-sm md:text-base tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-4">Vehicle Architecture Platform PM</p>
+    <h1 class="text-5xl md:text-7xl font-extrabold mb-6">
+      Hi, I'm <span class="gradient-text">Tom</span>
+    </h1>
+    <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-10">
+      차량 아키텍처 플랫폼 PM · Body on Frame &amp; Genesis 차종군 담당<br class="hidden md:block">
+      현대자동차 32년 경력의 차량 총합 엔지니어
+    </p>
+    <div class="flex flex-wrap gap-8 justify-center">
+      <a href="#projects" class="gradient-btn text-white font-semibold px-8 py-3 rounded-full shadow-lg shadow-purple-500/20">프로젝트 보기</a>
+      <a href="#contact" class="px-8 py-3 rounded-full border border-slate-300 dark:border-slate-700 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition">연락하기</a>
+    </div>
+  </div>
+
+  <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-slate-400">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+  </a>
+</section>
+
+<!-- About -->
+<section id="about" class="py-28 px-6 max-w-5xl mx-auto">
+  <div class="reveal">
+    <p class="text-sm font-semibold uppercase tracking-widest gradient-text mb-3">About</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-8">소개</h2>
+    <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+      현대자동차에서 <span class="font-semibold text-slate-800 dark:text-white">32년간</span> 근무하며
+      중량관리, 경쟁차분석, 전산시스템 개발, 차량 패키지/레이아웃, 차량총합설계를 두루 경험한
+      <span class="font-semibold text-slate-800 dark:text-white">차량 총합 엔지니어</span>입니다.
+      현재는 <span class="font-semibold text-slate-800 dark:text-white">아키텍처 플랫폼 PM</span>으로서
+      <span class="font-semibold text-slate-800 dark:text-white">Body on Frame</span> 플랫폼과
+      <span class="font-semibold text-slate-800 dark:text-white">Genesis 차종군</span>의 PM 업무를 수행하고 있습니다.
+    </p>
+  </div>
+</section>
+
+<!-- Career Timeline -->
+<section id="career" class="py-28 px-6 max-w-5xl mx-auto">
+  <div class="reveal mb-16">
+    <p class="text-sm font-semibold uppercase tracking-widest gradient-text mb-3">Career</p>
+    <h2 class="text-3xl md:text-4xl font-bold">경력 타임라인</h2>
+  </div>
+
+  <div class="relative pl-10">
+    <div class="timeline-line absolute left-3 top-2 bottom-2 w-0.5"></div>
+
+    <div class="space-y-14">
+      <div class="reveal relative">
+        <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-blue-500 border-4 border-white dark:border-slate-950"></div>
+        <h3 class="text-xl font-bold mb-1">중량관리</h3>
+        <p class="text-slate-600 dark:text-slate-300">차량 개발 초기 단계의 중량 목표 수립 및 관리</p>
+      </div>
+      <div class="reveal relative">
+        <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-blue-500 border-4 border-white dark:border-slate-950"></div>
+        <h3 class="text-xl font-bold mb-1">경쟁차 분석</h3>
+        <p class="text-slate-600 dark:text-slate-300">경쟁 차종 벤치마킹 및 상품성 분석</p>
+      </div>
+      <div class="reveal relative">
+        <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-purple-500 border-4 border-white dark:border-slate-950"></div>
+        <h3 class="text-xl font-bold mb-1">전산시스템 개발</h3>
+        <p class="text-slate-600 dark:text-slate-300">차량 개발 프로세스를 지원하는 전산시스템 기획 및 개발</p>
+      </div>
+      <div class="reveal relative">
+        <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-purple-500 border-4 border-white dark:border-slate-950"></div>
+        <h3 class="text-xl font-bold mb-1">차량 패키지 / 레이아웃</h3>
+        <p class="text-slate-600 dark:text-slate-300">차량 전체 패키지 구성 및 레이아웃 설계</p>
+      </div>
+      <div class="reveal relative">
+        <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-950"></div>
+        <h3 class="text-xl font-bold mb-1">차량 총합설계</h3>
+        <p class="text-slate-600 dark:text-slate-300">차량 전 영역을 아우르는 총합적 설계 총괄</p>
+      </div>
+      <div class="reveal relative">
+        <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-950 ring-4 ring-emerald-500/30"></div>
+        <h3 class="text-xl font-bold mb-1">아키텍처 플랫폼 PM <span class="text-sm font-medium gradient-text ml-1">현재</span></h3>
+        <p class="text-slate-600 dark:text-slate-300">Body on Frame &amp; Genesis 차종군 아키텍처 플랫폼 PM 수행</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="py-28 px-6 max-w-6xl mx-auto">
+  <div class="reveal mb-16">
+    <p class="text-sm font-semibold uppercase tracking-widest gradient-text mb-3">Projects</p>
+    <h2 class="text-3xl md:text-4xl font-bold">담당 프로젝트</h2>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="reveal card-hover rounded-2xl p-8 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="w-12 h-12 rounded-xl mb-6 flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-500 text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      </div>
+      <h3 class="text-xl font-bold mb-3">Genesis 차종군 아키텍처</h3>
+      <p class="text-slate-600 dark:text-slate-300">Genesis 차종군 전체의 아키텍처 플랫폼 전략 수립 및 PM 총괄</p>
+    </div>
+
+    <div class="reveal card-hover rounded-2xl p-8 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="w-12 h-12 rounded-xl mb-6 flex items-center justify-center bg-gradient-to-br from-purple-500 to-emerald-500 text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+      </div>
+      <h3 class="text-xl font-bold mb-3">Body on Frame 플랫폼</h3>
+      <p class="text-slate-600 dark:text-slate-300">Body on Frame 구조 플랫폼의 아키텍처 기획 및 개발 PM</p>
+    </div>
+
+    <div class="reveal card-hover rounded-2xl p-8 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="w-12 h-12 rounded-xl mb-6 flex items-center justify-center bg-gradient-to-br from-emerald-500 to-blue-500 text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+      </div>
+      <h3 class="text-xl font-bold mb-3">차량 총합설계</h3>
+      <p class="text-slate-600 dark:text-slate-300">차량 패키지·레이아웃부터 총합설계까지 아우르는 차량 개발 프로젝트</p>
+    </div>
+  </div>
+</section>
+
+<!-- Expertise -->
+<section id="expertise" class="py-28 px-6 max-w-5xl mx-auto">
+  <div class="reveal mb-16">
+    <p class="text-sm font-semibold uppercase tracking-widest gradient-text mb-3">Expertise</p>
+    <h2 class="text-3xl md:text-4xl font-bold">전문 분야</h2>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="reveal card-hover rounded-2xl p-8 border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900">
+      <h3 class="text-xl font-bold mb-2 gradient-text">자동차 전반적인 엔지니어</h3>
+      <p class="text-slate-600 dark:text-slate-300">중량관리부터 전산시스템, 패키지 설계까지 차량 개발 전 과정을 아우르는 폭넓은 엔지니어링 역량</p>
+    </div>
+    <div class="reveal card-hover rounded-2xl p-8 border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-purple-50 to-emerald-50 dark:from-slate-900 dark:to-slate-900">
+      <h3 class="text-xl font-bold mb-2 gradient-text">차량 총합적인 엔지니어</h3>
+      <p class="text-slate-600 dark:text-slate-300">개별 요소가 아닌 차량 전체를 아우르는 총합적 관점에서의 설계 및 아키텍처 기획 역량</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-28 px-6 max-w-3xl mx-auto text-center">
+  <div class="reveal">
+    <p class="text-sm font-semibold uppercase tracking-widest gradient-text mb-3">Contact</p>
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">연락처</h2>
+    <p class="text-slate-600 dark:text-slate-300 mb-10">차량 아키텍처, 플랫폼 PM 관련 협업 및 문의를 언제든 환영합니다.</p>
+    <a href="mailto:wangcho@naver.com" class="gradient-btn inline-flex items-center gap-3 text-white font-semibold px-8 py-4 rounded-full shadow-lg shadow-purple-500/20">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      wangcho@naver.com
+    </a>
+  </div>
+</section>
+
+<footer class="py-8 text-center text-sm text-slate-400 dark:text-slate-600 border-t border-slate-200 dark:border-slate-800">
+  &copy; 2026 Tom. All rights reserved.
+</footer>
+
+<script>
+  // Theme toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const iconSun = document.getElementById('icon-sun');
+  const iconMoon = document.getElementById('icon-moon');
+  const root = document.documentElement;
+
+  function applyTheme(mode){
+    if(mode === 'dark'){
+      root.classList.add('dark');
+      iconSun.classList.remove('hidden');
+      iconMoon.classList.add('hidden');
+    } else {
+      root.classList.remove('dark');
+      iconSun.classList.add('hidden');
+      iconMoon.classList.remove('hidden');
+    }
+    localStorage.setItem('theme', mode);
+  }
+
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+
+  themeToggle.addEventListener('click', () => {
+    const isDark = root.classList.contains('dark');
+    applyTheme(isDark ? 'light' : 'dark');
+  });
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let menuOpen = false;
+
+  menuBtn.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    if(menuOpen){
+      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      mobileMenu.style.opacity = '1';
+    } else {
+      mobileMenu.style.maxHeight = '0';
+      mobileMenu.style.opacity = '0';
+    }
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuOpen = false;
+      mobileMenu.style.maxHeight = '0';
+      mobileMenu.style.opacity = '0';
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
