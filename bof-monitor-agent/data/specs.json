@@ -246,6 +246,70 @@
     "tier": 1,
     "fetched_at": "2026-11-11",
     "quote": "700h Ultra Luxury 4WD Starting at $143,350"
+   },
+   "length": {
+    "value": 200.2,
+    "unit": "in",
+    "source_url": "https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2026/09/2027_Lexus_LX_SpecificationSheet.pdf",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "Overall Length (in.) 200.2, 200.59"
+   },
+   "width": {
+    "value": 78.35,
+    "unit": "in",
+    "source_url": "https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2026/09/2027_Lexus_LX_SpecificationSheet.pdf",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "Width (in.) 78.35"
+   },
+   "height": {
+    "value": 74.21,
+    "unit": "in",
+    "source_url": "https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2026/09/2027_Lexus_LX_SpecificationSheet.pdf",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "Height (in.) 74.21"
+   },
+   "wheelbase": {
+    "value": 112.2,
+    "unit": "in",
+    "source_url": "https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2026/09/2027_Lexus_LX_SpecificationSheet.pdf",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "Wheelbase (in.) 112.2"
+   },
+   "curb_weight": {
+    "value": 5434,
+    "unit": "lb",
+    "source_url": "https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2026/09/2027_Lexus_LX_SpecificationSheet.pdf",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "Curb Weight (FMVSS) Total (lb.) 5,434 – 5,875"
+   },
+   "ground_clearance": {
+    "value": 7.87,
+    "unit": "in",
+    "source_url": "https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2026/09/2027_Lexus_LX_SpecificationSheet.pdf",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "Min. Running Ground Clearance (in.) 7.87"
+   },
+   "accel_0_60mph": {
+    "value": 6.9,
+    "unit": "s",
+    "source_url": "https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2026/09/2027_Lexus_LX_SpecificationSheet.pdf",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "Acceleration (0-60) (sec) 6.9"
+   },
+   "top_speed": {
+    "value": 130,
+    "unit": "mph",
+    "source_url": "https://lexus-cms-media.s3.us-east-2.amazonaws.com/wp-content/uploads/2026/09/2027_Lexus_LX_SpecificationSheet.pdf",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "Max. Speed (mph) 130"
    }
   }
  },
