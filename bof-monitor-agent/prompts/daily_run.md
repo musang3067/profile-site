@@ -71,3 +71,13 @@ python3 run_daily.py data/briefs/DATE.json
 git add -A && git commit -m "Daily brief DATE" && git push -u origin claude/genesis-car-monitoring-agent-lwabcl
 ```
 푸시 실패 시 네트워크 오류만 2/4/8/16초 간격으로 재시도. 마지막에 오늘의 이슈 제목, blank 항목 수, 파일 경로를 한 단락으로 보고한다.
+
+## 7. 메일 발송
+푸시가 끝나면 Gmail 커넥터(`mcp__Gmail__send_message`)로 오늘의 PPTX를 보낸다.
+- 받는 사람: 예약 작업 프롬프트에 적힌 주소 (저장소에 주소를 적지 않는다)
+- 제목: `[BOF·제네시스 데일리] DATE 카드뉴스 – <대표 헤드라인>`
+- 본문(htmlBody): 오늘의 이슈 제목·라벨·점수, 3줄 요약, 신기술, 비교 차종 목록, blank 항목 수, 출처 링크
+- 첨부: `output/DATE/BOF_Genesis_Brief_YYYYMMDD.pptx`
+  (content 는 `sha256:<sha256sum 값>:<파일 절대경로>` 파일 참조 형식, mimeType `application/vnd.openxmlformats-officedocument.presentationml.presentation`)
+- 이슈가 없는 날에도 "신규 주요 이슈 없음" 브리프를 보낸다.
+- Gmail 도구가 없으면 메일은 건너뛰고 최종 보고에 "Gmail 커넥터 미연결"을 적는다.
