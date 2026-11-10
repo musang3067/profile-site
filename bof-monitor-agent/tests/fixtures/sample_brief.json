@@ -1,0 +1,36 @@
+{
+  "date": "2099-01-01",
+  "headlines": ["[테스트] 샘플 헤드라인 A", "[테스트] 샘플 헤드라인 B"],
+  "issues": [
+    {"title": "[테스트] 샘플 이슈", "label": "신차공개", "score": 88, "official": true,
+     "summary": ["요약 1", "요약 2", "요약 3"], "tech": ["기술 1", "기술 2"],
+     "sources": ["https://example.com/a"]}
+  ],
+  "comparisons": [
+    {"title": "[테스트] 비교", "target": "t", "hmg": ["h"], "rivals": ["r1", "r2"],
+     "reason": "테스트용 가상 데이터"}
+  ],
+  "insights": ["테스트 인사이트"],
+  "vehicles": {
+    "t": {"name": "Test BOF SUV", "maker": "TestCo", "platform": "BOF", "body": "SUV", "market": "US",
+          "specs": {
+            "length": {"value": 211.9, "unit": "in", "source_url": "https://example.com/t", "tier": 1},
+            "curb_weight": {"value": 5800, "unit": "lb", "source_url": "https://example.com/t", "tier": 1},
+            "power": {"value": 420, "unit": "hp", "source_url": "https://example.com/t", "tier": 1},
+            "torque": {"value": 460, "unit": "lb-ft", "source_url": "https://example.com/t", "tier": 1},
+            "fuel_economy": {"value": 17, "unit": "mpg", "source_url": "https://example.com/t", "tier": 3},
+            "engine": {"value": "3.4L V6 TT", "source_url": "https://example.com/t", "tier": 1},
+            "price_base": {"value": 90000, "unit": "USD", "source_url": "https://example.com/t", "tier": 1}
+          }},
+    "h": {"name": "Genesis Test", "maker": "Genesis", "group": "HMG", "platform": "Monocoque", "body": "SUV",
+          "specs": {"length": {"value": 4945, "unit": "mm", "source_url": "https://example.com/h", "tier": 1},
+                    "power": {"value": 375, "unit": "hp", "source_url": "https://example.com/h", "tier": 1},
+                    "price_base": {"value": 59000, "unit": "USD", "source_url": "https://example.com/h", "tier": 1}}},
+    "r1": {"name": "Rival One", "maker": "R", "platform": "BOF", "body": "Pickup",
+           "specs": {"length": {"value": 220.0, "unit": "in", "source_url": "https://example.com/r", "tier": 1},
+                     "power": {"value": 400, "unit": "hp", "source_url": "https://news.example.com/x", "tier": 4}}},
+    "r2": {"name": "Rival Two", "maker": "R", "platform": "BOF", "body": "SUV",
+           "specs": {"length": {"value": 240, "unit": "in", "source_url": "https://example.com/r2", "tier": 1},
+                     "price_base": {"value": 70000, "unit": "USD"}}}
+  }
+}
