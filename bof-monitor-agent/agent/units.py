@@ -32,6 +32,9 @@ _LINEAR = {
     "deg": ("°", 1.0),
     "kwh": ("kWh", 1.0),
     "usd": ("USD", 1.0),
+    "krw": ("KRW", 1.0),
+    "cad": ("CAD", 1.0),
+    "eur": ("EUR", 1.0),
     "seats": ("seats", 1.0),
 }
 
@@ -57,7 +60,7 @@ def to_si(value, unit: str | None):
 
 
 _DECIMALS = {"mm": 0, "kg": 0, "kW": 0, "N·m": 0, "km/h": 0, "km": 0, "L": 0,
-             "L/100km": 1, "kWh/100km": 1, "s": 1, "°": 1, "kWh": 1, "USD": 0, "seats": 0}
+             "L/100km": 1, "kWh/100km": 1, "s": 1, "°": 1, "kWh": 1, "USD": 0, "KRW": 0, "CAD": 0, "EUR": 0, "seats": 0}
 
 
 def fmt(value, unit: str | None) -> str:
@@ -67,6 +70,12 @@ def fmt(value, unit: str | None) -> str:
     s = f"{value:,.{d}f}"
     if unit == "USD":
         return f"${s}"
+    if unit == "KRW":
+        return f"₩{s}"
+    if unit == "CAD":
+        return f"C${s}"
+    if unit == "EUR":
+        return f"€{s}"
     if unit == "seats":
         return f"{s}인승"
     return f"{s} {unit}" if unit else s

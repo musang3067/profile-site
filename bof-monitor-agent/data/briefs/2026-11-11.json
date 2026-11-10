@@ -1,0 +1,54 @@
+{
+ "date": "2026-11-11",
+ "headlines": [
+  "제네시스 GV90·GV90 네오룬 국내 계약 개시 (11/10)",
+  "490kW·800N·m — 현대차그룹 역대 최고 출력 전기차",
+  "BOF 럭셔리 SUV 5종과 제원·가격 비교"
+ ],
+ "issues": [
+  {
+   "title": "제네시스 GV90·GV90 네오룬 국내 판매 개시",
+   "label": "출시/판매개시",
+   "score": 95,
+   "official": true,
+   "summary": [
+    "11월 10일 국내 계약 개시 — 제네시스 첫 풀사이즈 플래그십 전기 SUV (일반 스윙도어 GV90 / 코치도어 GV90 네오룬)",
+    "전용 eMP 플랫폼, 123.5kWh 배터리(그룹 최대), 전·후 모터 합산 490kW·800N·m",
+    "1회 충전 500km(22인치), 350kW 급속 10→80% 약 22분"
+   ],
+   "tech": [
+    "세계 최초 독립 개폐 히든 B필러 코치도어 '네오룬 아치 게이트' + 전동 180° 회전 앞좌석",
+    "세계 최초 루프 에어백 포함 12에어백, 열폭주 차단(TRP) 배터리",
+    "그룹 최초 Plug & Charge 2.0, 버튼리스 시동, 팝업 OLED 시네마틱 디스플레이(23.6→24.6인치)"
+   ],
+   "image": "data/images/genesis_gv90.jpg",
+   "image_credit": "Genesis",
+   "sources": [
+    "https://newsroom.genesis.com/genesis-commences-sales-of-gv90-neolun-and-gv90-in-korea/"
+   ]
+  }
+ ],
+ "comparisons": [
+  {
+   "title": "GV90 vs BOF 럭셔리 풀사이즈 SUV",
+   "target": "genesis_gv90",
+   "hmg": [
+    "genesis_gv80"
+   ],
+   "rivals": [
+    "cadillac_escalade",
+    "lincoln_navigator",
+    "lexus_lx",
+    "infiniti_qx80",
+    "jeep_grand_wagoneer"
+   ],
+   "reason": "미국 럭셔리 풀사이즈 3열 SUV(BOF) 주력 5종 · GV90은 모노코크 EV, 경쟁차는 BOF 내연기관 · 현대차그룹 슬롯은 GV80"
+  }
+ ],
+ "insights": [
+  "GV90의 490kW(약 657hp)는 비교군 BOF 경쟁차 공식 출력(LX 409hp, QX80 450hp)을 크게 웃돈다 — 출력은 플래그십 차별점이 된다.",
+  "현대차그룹에는 럭셔리 BOF SUV가 없다. GV90(모노코크 EV)이 이 차급의 대응 모델이고, 비교군은 모두 BOF 내연기관이다.",
+  "미국 공식 시작가는 QX80 $85,590, LX $109,050이고 GV80 최상위 트림이 $84,100이다 — GV90 미국 출시 가격대가 관전 포인트다(미국 가격 미발표).",
+  "Escalade·Navigator·Grand Wagoneer 공식 사이트는 자동 수집이 차단되어 미국 정부 연비 DB(EPA) 값만 반영했다 — 제원 빈칸은 다음 실행에서 보완한다."
+ ]
+}

@@ -18,7 +18,7 @@ def in_scope(vehicle: dict, length_mm: float | None) -> tuple[bool, str]:
     if vehicle.get("body") not in BODY_TYPES:
         return False, "SUV/픽업 아님"
     if length_mm is None:
-        return False, "전장 미확인"
+        return True, "전장 미확인(시드 목록 기준 포함 · 검증 필요)"
     if not (LENGTH_MIN_MM <= length_mm <= LENGTH_MAX_MM):
         return False, f"전장 {length_mm:.0f}mm 범위 밖"
     return True, "BOF SUV/픽업, 전장 범위 내"

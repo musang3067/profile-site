@@ -1,1 +1,425 @@
-{}
+{
+ "genesis_gv90": {
+  "name": "Genesis GV90",
+  "maker": "Genesis",
+  "group": "HMG",
+  "platform": "Monocoque",
+  "body": "SUV",
+  "market": "KR",
+  "trim": "22-inch",
+  "model_year": null,
+  "image": "data/images/genesis_gv90.jpg",
+  "image_credit": "Genesis",
+  "specs": {
+   "length": {
+    "value": 5285,
+    "unit": "mm",
+    "source_url": "https://newsroom.genesis.com/genesis-commences-sales-of-gv90-neolun-and-gv90-in-korea/",
+    "tier": 2,
+    "fetched_at": "2026-11-11",
+    "quote": "Overall Length(mm) 5,285"
+   },
+   "width": {
+    "value": 2030,
+    "unit": "mm",
+    "source_url": "https://newsroom.genesis.com/genesis-commences-sales-of-gv90-neolun-and-gv90-in-korea/",
+    "tier": 2,
+    "fetched_at": "2026-11-11",
+    "quote": "Overall Width (mm) 2,030"
+   },
+   "height": {
+    "value": 1815,
+    "unit": "mm",
+    "source_url": "https://newsroom.genesis.com/genesis-commences-sales-of-gv90-neolun-and-gv90-in-korea/",
+    "tier": 2,
+    "fetched_at": "2026-11-11",
+    "quote": "Overall Height (mm) 1,815 (22-inch wheels)"
+   },
+   "wheelbase": {
+    "value": 3245,
+    "unit": "mm",
+    "source_url": "https://newsroom.genesis.com/genesis-commences-sales-of-gv90-neolun-and-gv90-in-korea/",
+    "tier": 2,
+    "fetched_at": "2026-11-11",
+    "quote": "Wheelbase (mm) 3,245"
+   },
+   "seats": {
+    "value": 7,
+    "unit": "seats",
+    "source_url": "https://newsroom.genesis.com/genesis-commences-sales-of-gv90-neolun-and-gv90-in-korea/",
+    "tier": 2,
+    "fetched_at": "2026-11-11",
+    "quote": "22-inch (6- and 7-seater): 500/3.4"
+   },
+   "engine": {
+    "value": "전·후 듀얼 모터 / 123.5kWh",
+    "unit": null,
+    "source_url": "https://newsroom.genesis.com/genesis-commences-sales-of-gv90-neolun-and-gv90-in-korea/",
+    "tier": 2,
+    "fetched_at": "2026-11-11",
+    "quote": "front and rear electric motors ... 123.5 kilowatt-hour high-voltage battery"
+   },
+   "power": {
+    "value": 490,
+    "unit": "kW",
+    "source_url": "https://newsroom.genesis.com/genesis-commences-sales-of-gv90-neolun-and-gv90-in-korea/",
+    "tier": 2,
+    "fetched_at": "2026-11-11",
+    "quote": "combined maximum output of 490 kilowatts"
+   },
+   "torque": {
+    "value": 800,
+    "unit": "Nm",
+    "source_url": "https://newsroom.genesis.com/genesis-commences-sales-of-gv90-neolun-and-gv90-in-korea/",
+    "tier": 2,
+    "fetched_at": "2026-11-11",
+    "quote": "peak torque of 800 Newton-meters"
+   },
+   "ev_range": {
+    "value": 500,
+    "unit": "km",
+    "source_url": "https://newsroom.genesis.com/genesis-commences-sales-of-gv90-neolun-and-gv90-in-korea/",
+    "tier": 2,
+    "fetched_at": "2026-11-11",
+    "quote": "estimated single-charge driving range of 500 kilometers"
+   }
+  }
+ },
+ "genesis_gv80": {
+  "name": "Genesis GV80",
+  "maker": "Genesis",
+  "group": "HMG",
+  "platform": "Monocoque",
+  "body": "SUV",
+  "market": "US",
+  "trim": "2.5T",
+  "model_year": 2027,
+  "image": null,
+  "image_credit": null,
+  "specs": {
+   "engine": {
+    "value": "2.5L 4기통 터보",
+    "unit": null,
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Genesis&baseModel=GV80&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "2027 Genesis GV80 AWD 2.5 L, 4 cyl, Automatic (S8), Turbo"
+   },
+   "power": {
+    "value": 300,
+    "unit": "hp",
+    "source_url": "https://www.genesis.com/us/en/gv80",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "2.5T RWD ... Horsepower 300"
+   },
+   "transmission": {
+    "value": "8단 자동",
+    "unit": null,
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Genesis&baseModel=GV80&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "Automatic (S8)"
+   },
+   "drivetrain": {
+    "value": "RWD / AWD",
+    "unit": null,
+    "source_url": "https://www.genesis.com/us/en/gv80",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "2.5T RWD ... 2.5T AWD"
+   },
+   "fuel_economy": {
+    "value": 21,
+    "unit": "mpg",
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Genesis&baseModel=GV80&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "2027 Genesis GV80 AWD 2.5 L ... 21 MPG combined"
+   },
+   "price_base": {
+    "value": 58850,
+    "unit": "USD",
+    "source_url": "https://www.genesis.com/us/en/gv80",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "2.5T RWD Starting MSRP $58,850"
+   },
+   "price_top": {
+    "value": 84100,
+    "unit": "USD",
+    "source_url": "https://www.genesis.com/us/en/gv80",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "Build 2027 GV80 3.5T PRESTIGE BLACK AWD $84,100"
+   }
+  }
+ },
+ "lexus_lx": {
+  "name": "Lexus LX",
+  "maker": "Lexus",
+  "group": "Toyota",
+  "platform": "BOF",
+  "body": "SUV",
+  "market": "US",
+  "trim": "600 Premium",
+  "model_year": 2027,
+  "image": null,
+  "image_credit": null,
+  "specs": {
+   "seats": {
+    "value": 7,
+    "unit": "seats",
+    "source_url": "https://www.lexus.com/models/LX/specifications",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "409-horsepower twin-turbo V6 engine 479 lb-ft of torque @ 2,000 rpm 7 seats"
+   },
+   "engine": {
+    "value": "트윈터보 V6",
+    "unit": null,
+    "source_url": "https://www.lexus.com/models/LX/specifications",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "ENGINE TYPE Twin-Turbo V6"
+   },
+   "power": {
+    "value": 409,
+    "unit": "hp",
+    "source_url": "https://www.lexus.com/models/LX/specifications",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "tuned to deliver 409 horsepower"
+   },
+   "torque": {
+    "value": 479,
+    "unit": "lb-ft",
+    "source_url": "https://www.lexus.com/models/LX/specifications",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "with 479 lb-ft of torque"
+   },
+   "transmission": {
+    "value": "10단 자동(Direct-Shift)",
+    "unit": null,
+    "source_url": "https://www.lexus.com/models/LX/specifications",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "10-speed Direct-Shift automatic transmission"
+   },
+   "drivetrain": {
+    "value": "상시 4WD",
+    "unit": null,
+    "source_url": "https://www.lexus.com/models/LX/specifications",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "DRIVETRAIN Full-Time 4WD"
+   },
+   "towing": {
+    "value": 8000,
+    "unit": "lb",
+    "source_url": "https://www.lexus.com/models/LX/specifications",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "TOWING CAPACITY 8,000 Pounds"
+   },
+   "fuel_economy": {
+    "value": 19,
+    "unit": "mpg",
+    "source_url": "https://www.lexus.com/models/LX/specifications",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "COMBINED EPA-EST. MPG RATING 19"
+   },
+   "price_base": {
+    "value": 109050,
+    "unit": "USD",
+    "source_url": "https://www.lexus.com/models/LX/specifications",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "600 Premium 4WD Starting at $109,050"
+   },
+   "price_top": {
+    "value": 143350,
+    "unit": "USD",
+    "source_url": "https://www.lexus.com/models/LX/specifications",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "700h Ultra Luxury 4WD Starting at $143,350"
+   }
+  }
+ },
+ "infiniti_qx80": {
+  "name": "Infiniti QX80",
+  "maker": "Infiniti",
+  "group": "Nissan",
+  "platform": "BOF",
+  "body": "SUV",
+  "market": "US",
+  "trim": "PURE",
+  "model_year": 2027,
+  "image": "data/images/infiniti_qx80.jpg",
+  "image_credit": "INFINITI",
+  "specs": {
+   "engine": {
+    "value": "3.5L V6 트윈터보",
+    "unit": null,
+    "source_url": "https://www.infinitiusa.com/vehicles/suvs/qx80/models-specs.html",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "3.5L V6 Twin Turbo Engine producing up to 450 hp and up to 516 lb ft of torque"
+   },
+   "power": {
+    "value": 450,
+    "unit": "hp",
+    "source_url": "https://www.infinitiusa.com/vehicles/suvs/qx80/models-specs.html",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "producing up to 450 hp"
+   },
+   "torque": {
+    "value": 516,
+    "unit": "lb-ft",
+    "source_url": "https://www.infinitiusa.com/vehicles/suvs/qx80/models-specs.html",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "up to 516 lb ft of torque"
+   },
+   "fuel_economy": {
+    "value": 17,
+    "unit": "mpg",
+    "source_url": "https://www.infinitiusa.com/vehicles/suvs/qx80/models-specs.html",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "Combined 17 MPG"
+   },
+   "price_base": {
+    "value": 85590,
+    "unit": "USD",
+    "source_url": "https://www.infinitiusa.com/vehicles/suvs/qx80.html",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "2027 INFINITI QX80 Starting MSRP $85,590"
+   },
+   "price_top": {
+    "value": 113685,
+    "unit": "USD",
+    "source_url": "https://www.infinitiusa.com/vehicles/suvs/qx80/models-specs.html",
+    "tier": 1,
+    "fetched_at": "2026-11-11",
+    "quote": "AUTOGRAPH 4WD STARTING MSRP $113,685"
+   }
+  }
+ },
+ "cadillac_escalade": {
+  "name": "Cadillac Escalade",
+  "maker": "Cadillac",
+  "group": "GM",
+  "platform": "BOF",
+  "body": "SUV",
+  "market": "US",
+  "model_year": 2027,
+  "image": null,
+  "image_credit": null,
+  "specs": {
+   "engine": {
+    "value": "6.2L V8",
+    "unit": null,
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Cadillac&baseModel=Escalade&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "2027 Cadillac Escalade 4WD 6.2 L, 8 cyl, Automatic 10-spd"
+   },
+   "transmission": {
+    "value": "10단 자동",
+    "unit": null,
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Cadillac&baseModel=Escalade&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "Automatic 10-spd"
+   },
+   "fuel_economy": {
+    "value": 16,
+    "unit": "mpg",
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Cadillac&baseModel=Escalade&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "2027 Cadillac Escalade 4WD ... 16 MPG combined"
+   }
+  }
+ },
+ "lincoln_navigator": {
+  "name": "Lincoln Navigator",
+  "maker": "Lincoln",
+  "group": "Ford",
+  "platform": "BOF",
+  "body": "SUV",
+  "market": "US",
+  "model_year": 2027,
+  "image": null,
+  "image_credit": null,
+  "specs": {
+   "engine": {
+    "value": "3.5L V6 터보",
+    "unit": null,
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Lincoln&baseModel=Navigator&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "2027 Lincoln Navigator 4WD 3.5 L, 6 cyl, Automatic (S10), Turbo"
+   },
+   "transmission": {
+    "value": "10단 자동",
+    "unit": null,
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Lincoln&baseModel=Navigator&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "Automatic (S10)"
+   },
+   "fuel_economy": {
+    "value": 17,
+    "unit": "mpg",
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Lincoln&baseModel=Navigator&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "2027 Lincoln Navigator 4WD ... 17 MPG combined"
+   }
+  }
+ },
+ "jeep_grand_wagoneer": {
+  "name": "Jeep Grand Wagoneer",
+  "maker": "Jeep",
+  "group": "Stellantis",
+  "platform": "BOF",
+  "body": "SUV",
+  "market": "US",
+  "model_year": 2027,
+  "image": null,
+  "image_credit": null,
+  "specs": {
+   "engine": {
+    "value": "3.0L 직렬6 터보",
+    "unit": null,
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Jeep&baseModel=Grand%20Wagoneer&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "2027 Jeep Grand Wagoneer 4WD 3.0 L, 6 cyl, Automatic 8-spd, Turbo"
+   },
+   "transmission": {
+    "value": "8단 자동",
+    "unit": null,
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Jeep&baseModel=Grand%20Wagoneer&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "Automatic 8-spd"
+   },
+   "fuel_economy": {
+    "value": 18,
+    "unit": "mpg",
+    "source_url": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2027&make=Jeep&baseModel=Grand%20Wagoneer&srchtyp=ymm",
+    "tier": 3,
+    "fetched_at": "2026-11-11",
+    "quote": "2027 Jeep Grand Wagoneer 4WD ... 18 MPG combined"
+   }
+  }
+ }
+}

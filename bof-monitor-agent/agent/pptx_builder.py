@@ -175,10 +175,10 @@ def _roster(comp, vehicles):
 
 def slide_photos(prs, brief, comp, roster):
     s = _base(prs, brief["date"], comp.get("title", "비교 차종"), kicker="COMPARE · 비교 차종")
-    cw, ch, gap = Inches(3.27), Inches(1.55), Inches(0.16)
+    cw, ch, gap = Inches(3.27), Inches(1.3), Inches(0.16)
     for i, (role, v) in enumerate(roster[:8]):
         cx = Inches(0.4) + (i % 2) * (cw + gap)
-        cy = Inches(1.3) + (i // 2) * (ch + Inches(0.42))
+        cy = Inches(1.3) + (i // 2) * (ch + Inches(0.5))
         _picture(s, v.get("image"), cx, cy, cw, ch, v.get("image_credit"))
         _chip(s, cx + Inches(0.08), cy + Inches(0.08), role, ROLE_COLOR[role], 8)
         name = v["name"] + (f" {v['trim']}" if v.get("trim") else "")
@@ -230,7 +230,7 @@ def _table(slide, roster, keys, y=Inches(1.35)):
             f = v["fields"][k]
             if f["value"] is None:
                 lines = [("–", 11, False, BLANK_GREY)]
-            elif f["si_unit"] and f["original"] and f["si_unit"] not in ("USD", "s", "seats") \
+            elif f["si_unit"] and f["original"] and f["si_unit"] not in ("USD", "KRW", "CAD", "EUR", "s", "seats") \
                     and f["unit"] and f["unit"].lower() not in ("mm", "kg", "kw", "nm", "n·m", "km/h", "km", "l"):
                 lines = [(f["display"], 9, True, INK), (f"({f['original']})", 6.5, False, MUTED)]
             else:
@@ -248,8 +248,10 @@ def slide_charts(prs, brief, comp, roster):
     s = _base(prs, brief["date"], "가격 · 출력 비교", kicker="COMPARE · 가격/성능")
     names = [v["name"] for _, v in roster[:7]]
 
-    def bar(y, key, title, scale=1.0, fmt='#,##0'):
-        vals = [v["fields"][key]["si_value"] for _, v in roster[:7]]
+    def bar(y, key, title, scale=1.0, fmt='#,##0', only_unit=None):
+        vals = [v["fields"][key]["si_value"]
+                if only_unit is None or v["fields"][key]["si_unit"] == only_unit else None
+                for _, v in roster[:7]]
         _text(s, Inches(0.4), y, Inches(6.7), Inches(0.3), title, 11, True)
         if all(x is None for x in vals):
             _text(s, Inches(0.4), y + Inches(0.4), Inches(6.7), Inches(0.4), "비교 가능한 데이터 없음 (–)", 10, False, BLANK_GREY)
@@ -282,7 +284,7 @@ def slide_charts(prs, brief, comp, roster):
         pt.format.fill.solid()
         pt.format.fill.fore_color.rgb = COPPER
 
-    bar(Inches(1.3), "price_base", "시작가 (US MSRP, USD)", fmt='"$"#,##0')
+    bar(Inches(1.3), "price_base", "시작가 (US MSRP, USD · 미국 미판매 차종은 (–))", fmt='"$"#,##0', only_unit="USD")
     bar(Inches(5.0), "power", "최고출력 (kW)")
 
 
