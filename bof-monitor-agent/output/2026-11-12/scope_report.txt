@@ -1,0 +1,7 @@
+IN  genesis_gv90                 제네시스 전 차종 · blank 10/19
+IN  genesis_gv80                 제네시스 전 차종 · blank 12/19
+IN  lexus_lx                     BOF SUV/픽업, 전장 범위 내 · blank 1/19
+IN  infiniti_qx80                전장 미확인(시드 목록 기준 포함 · 검증 필요) · blank 13/19
+IN  cadillac_escalade            전장 미확인(시드 목록 기준 포함 · 검증 필요) · blank 16/19
+IN  lincoln_navigator            전장 미확인(시드 목록 기준 포함 · 검증 필요) · blank 16/19
+IN  jeep_grand_wagoneer          전장 미확인(시드 목록 기준 포함 · 검증 필요) · blank 11/19

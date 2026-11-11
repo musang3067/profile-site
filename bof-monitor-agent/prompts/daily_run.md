@@ -4,6 +4,8 @@
 오늘 날짜(KST)를 `DATE`(YYYY-MM-DD)로 사용한다.
 
 ## 0. 준비
+공식 사이트 렌더링 도구(출력은 스크래치 폴더에 저장):
+`node tools/fetch.js <출력폴더> <URL...>` · `node tools/links.js <정규식> <URL...>` · `node tools/click.js <URL> <버튼텍스트> <출력파일>`
 ```bash
 git fetch origin claude/genesis-car-monitoring-agent-lwabcl
 git checkout claude/genesis-car-monitoring-agent-lwabcl && git pull origin claude/genesis-car-monitoring-agent-lwabcl

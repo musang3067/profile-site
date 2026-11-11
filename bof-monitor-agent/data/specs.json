@@ -456,7 +456,7 @@
   "platform": "BOF",
   "body": "SUV",
   "market": "US",
-  "model_year": 2027,
+  "model_year": 2026,
   "image": null,
   "image_credit": null,
   "specs": {
@@ -483,7 +483,48 @@
     "tier": 3,
     "fetched_at": "2026-11-11",
     "quote": "2027 Jeep Grand Wagoneer 4WD ... 18 MPG combined"
+   },
+   "power": {
+    "value": 420,
+    "unit": "hp",
+    "source_url": "https://media.stellantisnorthamerica.com/newsrelease.do?id=27102&mid=1541",
+    "tier": 2,
+    "fetched_at": "2026-11-12",
+    "quote": "3.0-liter Hurricane twin-turbo inline six-cylinder engine returns, delivering 420 horsepower"
+   },
+   "torque": {
+    "value": 468,
+    "unit": "lb-ft",
+    "source_url": "https://media.stellantisnorthamerica.com/newsrelease.do?id=27102&mid=1541",
+    "tier": 2,
+    "fetched_at": "2026-11-12",
+    "quote": "420 horsepower and 468 lb.-ft. of torque"
+   },
+   "towing": {
+    "value": 10000,
+    "unit": "lb",
+    "source_url": "https://media.stellantisnorthamerica.com/newsrelease.do?id=27102&mid=1541",
+    "tier": 2,
+    "fetched_at": "2026-11-12",
+    "quote": "towing capability of up to 10,000 lbs."
+   },
+   "price_base": {
+    "value": 62145,
+    "unit": "USD",
+    "source_url": "https://media.stellantisnorthamerica.com/newsrelease.do?id=27102&mid=1541",
+    "tier": 2,
+    "fetched_at": "2026-11-12",
+    "quote": "Base MSRP Excludes $2,595 destination ... Grand Wagoneer $62,145"
+   },
+   "price_top": {
+    "value": 93390,
+    "unit": "USD",
+    "source_url": "https://media.stellantisnorthamerica.com/newsrelease.do?id=27102&mid=1541",
+    "tier": 2,
+    "fetched_at": "2026-11-12",
+    "quote": "Summit Obsidian NA $93,390"
    }
-  }
+  },
+  "trim": "Grand Wagoneer"
  }
 }

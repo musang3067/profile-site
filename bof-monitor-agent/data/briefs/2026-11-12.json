@@ -1,0 +1,32 @@
+{
+ "date": "2026-11-12",
+ "headlines": [
+  "신규 주요 이슈 없음 (중요도 70점 이상 0건)",
+  "Jeep Grand Wagoneer 공식 제원·가격 보완 (420hp·468lb-ft·$62,145~)",
+  "GV90 vs BOF 럭셔리 SUV 비교 업데이트"
+ ],
+ "issues": [],
+ "comparisons": [
+  {
+   "title": "GV90 vs BOF 럭셔리 풀사이즈 SUV",
+   "target": "genesis_gv90",
+   "hmg": [
+    "genesis_gv80"
+   ],
+   "rivals": [
+    "cadillac_escalade",
+    "lincoln_navigator",
+    "lexus_lx",
+    "infiniti_qx80",
+    "jeep_grand_wagoneer"
+   ],
+   "reason": "미국 럭셔리 풀사이즈 3열 SUV(BOF) 주력 5종 · GV90은 모노코크 EV, 경쟁차는 BOF 내연기관 · 현대차그룹 슬롯은 GV80"
+  }
+ ],
+ "insights": [
+  "지난 24시간 동안 대상 차종에서 중요도 70점을 넘는 공식 발표는 없었다(직전 이슈: 11/10 GV90 국내 판매 개시).",
+  "Grand Wagoneer 2026년형은 시작가 $62,145(배송비 별도)로 비교군 BOF 럭셔리 SUV 중 가장 낮고, 견인력은 10,000lb로 가장 높다(공식 보도자료).",
+  "Grand Wagoneer REEV(주행거리 연장형 EV)는 647hp 예상 — GV90(490kW≈657hp)과 함께 대형 럭셔리 SUV의 전동화 고출력 경쟁이 시작됐다.",
+  "Escalade·Navigator는 GM·Ford 사이트 전체가 자동 수집을 차단해 EPA 값만 반영 중이다."
+ ]
+}
