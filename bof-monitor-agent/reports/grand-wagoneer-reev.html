@@ -1,0 +1,350 @@
+<title>Grand Wagoneer REEV 분석</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 단일 열 기술 리포트 — 상단 요약 수치 → 출시 타임라인 → PT/PE/배터리 표 → ICE 대비 비교 → 치수 → 시사점 → 출처 */
+:root {
+  --bg: #f5f6f4;
+  --surface: #ffffff;
+  --ink: #17201f;
+  --muted: #5d6865;
+  --line: #d9dedb;
+  --accent: #0f7a6c;      /* 배터리/전동화 */
+  --accent-soft: #dcefea;
+  --ice: #6b5a46;         /* 내연기관 */
+  --ice-soft: #efe8df;
+  --warn: #9a5b00;
+  --warn-soft: #fbefd9;
+  --official: #1d5fa8;
+  --official-soft: #e1ebf7;
+  --font-display: "Space Grotesk", "IBM Plex Sans KR", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans KR", system-ui, -apple-system, "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111615; --surface: #182020; --ink: #e6ecea; --muted: #9aa7a3; --line: #2b3533;
+    --accent: #4fc2b0; --accent-soft: #163a35; --ice: #c9a982; --ice-soft: #3a3024;
+    --warn: #f0b75a; --warn-soft: #3a2c12; --official: #7fb2ec; --official-soft: #19283a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111615; --surface: #182020; --ink: #e6ecea; --muted: #9aa7a3; --line: #2b3533;
+  --accent: #4fc2b0; --accent-soft: #163a35; --ice: #c9a982; --ice-soft: #3a3024;
+  --warn: #f0b75a; --warn-soft: #3a2c12; --official: #7fb2ec; --official-soft: #19283a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body);
+  font-size: 15px; line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+.wrap { max-width: 920px; margin: 0 auto; display: grid; gap: 40px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.25; }
+h1 { font-size: clamp(28px, 5vw, 40px); letter-spacing: -0.01em; }
+h2 { font-size: 22px; }
+h3 { font-size: 16px; }
+p { margin: 0; max-width: 68ch; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header { display: grid; gap: 14px; }
+.lede { color: var(--muted); font-size: 16px; }
+.status { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.chip.off { background: var(--official-soft); color: var(--official); }
+.chip.rep { background: var(--warn-soft); color: var(--warn); }
+.chip.ref { background: var(--ice-soft); color: var(--ice); }
+.chip.ev { background: var(--accent-soft); color: var(--accent); }
+.chip.big { font-size: 13px; padding: 4px 12px; }
+
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.kpi { background: var(--surface); padding: 16px; display: grid; gap: 4px; align-content: start; }
+.kpi .v { font-family: var(--font-display); font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.kpi .u { font-size: 13px; color: var(--muted); font-weight: 400; }
+.kpi .l { font-size: 12.5px; color: var(--muted); }
+@media (max-width: 680px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+section { display: grid; gap: 16px; }
+.sec-head { display: grid; gap: 6px; }
+.note { font-size: 13px; color: var(--muted); }
+
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-left: 2px solid var(--line); }
+.timeline li { position: relative; padding: 0 0 18px 20px; display: grid; gap: 4px; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--surface); border: 2px solid var(--muted); }
+.timeline li.done::before { background: var(--muted); }
+.timeline li.now::before { background: var(--warn); border-color: var(--warn); }
+.timeline .when { font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
+.timeline .what { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 14px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; background: var(--bg); }
+tbody tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+td .si { display: block; font-size: 12.5px; color: var(--muted); }
+td.item { font-weight: 500; white-space: nowrap; }
+td.blank { color: var(--muted); }
+.group td { background: var(--bg); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--muted); padding-block: 6px; }
+.delta { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--accent); white-space: nowrap; }
+
+.diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; overflow-x: auto; }
+.diagram svg { display: block; width: 100%; min-width: 600px; height: auto; }
+.diagram text { font-family: var(--font-body); }
+
+.bars { display: grid; gap: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+.bar-set { display: grid; gap: 8px; }
+.bar-set h3 { font-size: 14px; }
+.bar-row { display: grid; grid-template-columns: 72px minmax(0, 1fr) 132px; gap: 10px; align-items: center; font-size: 13px; }
+.track { height: 14px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+.fill { height: 100%; border-radius: 3px; }
+.fill.ev { background: var(--accent); }
+.fill.ice { background: var(--ice); }
+.bar-row .val { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+@media (max-width: 480px) { .bar-row { grid-template-columns: 56px minmax(0, 1fr); } .bar-row .val { grid-column: 2; text-align: left; } }
+
+.insights { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.insights li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 4px; }
+.insights b { font-family: var(--font-display); font-size: 15px; }
+
+.sources { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 13.5px; }
+.sources li { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.sources a { color: var(--official); word-break: break-word; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 13px; color: var(--muted); align-items: center; }
+footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">BOF · Genesis Daily 심층 리포트 · 기준일 2026-11-12 (KST)</span>
+    <h1>Jeep Grand Wagoneer REEV</h1>
+    <p class="lede">미국 최초의 주행거리 연장형 전기 SUV(REEV)입니다. 바퀴는 전기모터로만 구동하고, 3.6L V6 엔진은 발전만 합니다. BOF 차체의 그랜드 왜고니어에 92kWh 배터리를 더한 구성입니다.</p>
+    <div class="status">
+      <span class="chip rep big">출시 전 · 생산 일정 지연</span>
+      <span class="chip off big">미국 가격 미발표</span>
+      <span class="chip ev big">Summit 계열 트림 전용</span>
+    </div>
+    <div class="legend">
+      <span><span class="chip off">공식</span> Stellantis 보도자료</span>
+      <span><span class="chip rep">보도</span> 언론·딜러 자료, 미확정</span>
+      <span><span class="chip ref">참고</span> 동일 파워트레인 Ram 1500 REV 값</span>
+    </div>
+  </header>
+
+  <div class="kpis" aria-label="핵심 수치">
+    <div class="kpi"><span class="l">시스템 출력 (추정)</span><span class="v">647<span class="u"> hp</span></span><span class="l">482 kW · <span class="chip off">공식</span></span></div>
+    <div class="kpi"><span class="l">시스템 토크 (추정)</span><span class="v">620<span class="u"> lb-ft</span></span><span class="l">841 N·m · <span class="chip off">공식</span></span></div>
+    <div class="kpi"><span class="l">배터리 (총용량)</span><span class="v">92<span class="u"> kWh</span></span><span class="l">수랭식 파우치셀 · <span class="chip off">공식</span></span></div>
+    <div class="kpi"><span class="l">총 주행거리 목표</span><span class="v">500+<span class="u"> mi</span></span><span class="l">805 km 이상 · <span class="chip off">공식</span></span></div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <h2>출시 시점</h2>
+      <p class="note">공식 입장은 "2026년 출시, 후반 투입(late availability)"입니다. 실제 생산 일정은 공급사 문서를 근거로 한 보도로만 알려져 있습니다.</p>
+    </div>
+    <ol class="timeline">
+      <li class="done">
+        <span class="when">2025-10</span>
+        <span class="what">2026년형 그랜드 왜고니어 공개. REEV는 "coming in 2026", 후반 투입으로 발표 <span class="chip off">공식</span></span>
+      </li>
+      <li class="done">
+        <span class="when">2026 상반기</span>
+        <span class="what">당초 생산 시작 목표: 2026년 5월, 워런 트럭 공장(미시간) <span class="chip rep">보도</span></span>
+      </li>
+      <li class="done">
+        <span class="when">2026-07</span>
+        <span class="what">EV 인증을 마친 딜러가 2027년형 Grand Wagoneer REV 초기 주문 시작. 표준 휠베이스 Summit·Summit Reserve부터 <span class="chip rep">보도</span></span>
+      </li>
+      <li class="done">
+        <span class="when">2026-09-02</span>
+        <span class="what">Automotive News: 공급사 메모 기준으로 생산이 5월에서 11월로 연기됨. Ram 1500 REV는 2027년 4월 중순. Stellantis는 "두 프로그램 모두 일정대로"라는 입장 <span class="chip rep">보도</span></span>
+      </li>
+      <li class="now">
+        <span class="when">2026-11 (현재)</span>
+        <span class="what">워런 트럭 생산 시작 예정 시점. 실제 착수 여부는 공식 확인 전이고, 2027년 11월로 적은 매체도 있어 보도가 엇갈림 <span class="chip rep">미확정</span></span>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>파워트레인 구조</h2>
+      <p class="note">직렬형 구조로, 엔진과 바퀴 사이에 기계적 연결이 없습니다. 엔진은 발전기를 돌려 배터리를 충전하거나 모터에 전력을 공급합니다.</p>
+    </div>
+    <div class="diagram" role="img" aria-label="REEV 파워트레인 구성도: 3.6L V6 엔진이 130kW 발전기를 돌리고, 92kWh 배터리와 함께 앞뒤 전기모터에 전력을 공급해 네 바퀴를 구동한다">
+      <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"></path>
+          </marker>
+        </defs>
+        <rect x="10" y="20" width="150" height="64" rx="8" fill="var(--ice-soft)" stroke="var(--ice)"></rect>
+        <text x="85" y="47" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">3.6L V6 엔진</text>
+        <text x="85" y="68" text-anchor="middle" font-size="12" fill="var(--muted)">발전 전용 · 연료 20 gal</text>
+
+        <rect x="220" y="20" width="150" height="64" rx="8" fill="var(--surface)" stroke="var(--line)"></rect>
+        <text x="295" y="47" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">발전기</text>
+        <text x="295" y="68" text-anchor="middle" font-size="12" fill="var(--muted)">130 kW</text>
+
+        <rect x="220" y="126" width="150" height="64" rx="8" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text x="295" y="153" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">배터리 92 kWh</text>
+        <text x="295" y="174" text-anchor="middle" font-size="12" fill="var(--muted)">수랭 파우치셀 · 400V</text>
+
+        <rect x="440" y="73" width="130" height="64" rx="8" fill="var(--surface)" stroke="var(--line)"></rect>
+        <text x="505" y="100" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">전력 분배</text>
+        <text x="505" y="121" text-anchor="middle" font-size="12" fill="var(--muted)">400V 시스템</text>
+
+        <rect x="630" y="20" width="120" height="64" rx="8" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text x="690" y="47" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">전륜 모터</text>
+        <text x="690" y="68" text-anchor="middle" font-size="12" fill="var(--muted)">출력 미공개</text>
+
+        <rect x="630" y="126" width="120" height="64" rx="8" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text x="690" y="153" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">후륜 모터</text>
+        <text x="690" y="174" text-anchor="middle" font-size="12" fill="var(--muted)">출력 미공개</text>
+
+        <line x1="160" y1="52" x2="216" y2="52" stroke="var(--muted)" stroke-width="2" marker-end="url(#arr)"></line>
+        <text x="188" y="44" text-anchor="middle" font-size="11" fill="var(--muted)">기계</text>
+        <line x1="370" y1="52" x2="436" y2="96" stroke="var(--muted)" stroke-width="2" marker-end="url(#arr)"></line>
+        <line x1="436" y1="114" x2="374" y2="156" stroke="var(--muted)" stroke-width="2" marker-end="url(#arr)" marker-start="url(#arr)"></line>
+        <text x="392" y="148" text-anchor="middle" font-size="11" fill="var(--muted)">충·방전</text>
+        <line x1="570" y1="96" x2="626" y2="56" stroke="var(--muted)" stroke-width="2" marker-end="url(#arr)"></line>
+        <line x1="570" y1="114" x2="626" y2="154" stroke="var(--muted)" stroke-width="2" marker-end="url(#arr)"></line>
+        <text x="600" y="108" text-anchor="middle" font-size="11" fill="var(--muted)">전기</text>
+      </svg>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>상세 제원 · PT · PE · 배터리</h2>
+      <p class="note">원 단위(미국)를 그대로 적고 SI 환산값을 함께 표시했습니다. 확인하지 못한 항목은 빈칸(–)입니다.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>항목</th><th>값</th><th>근거</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr class="group"><td colspan="4">시스템 · 성능</td></tr>
+          <tr><td class="item">구동 방식</td><td>직렬 REEV, 전기모터로만 바퀴 구동</td><td><span class="chip off">공식</span></td><td>"wheels powered exclusively by electric motors"</td></tr>
+          <tr><td class="item">시스템 최고출력</td><td class="num">647 hp<span class="si">482 kW</span></td><td><span class="chip off">공식</span></td><td>추정치(estimated). 한 딜러 가이드는 637hp로 표기</td></tr>
+          <tr><td class="item">시스템 최대토크</td><td class="num">620 lb-ft<span class="si">841 N·m</span></td><td><span class="chip off">공식</span></td><td>추정치</td></tr>
+          <tr><td class="item">0→60 mph</td><td class="num">약 5.0 s<span class="si">0→96.6 km/h</span></td><td><span class="chip off">공식</span></td><td>"역대 가장 빠르고 강력한 Grand Wagoneer"</td></tr>
+          <tr><td class="item">최대 견인</td><td class="num">10,000 lb<span class="si">4,536 kg</span></td><td><span class="chip rep">보도</span></td><td>초기 딜러 자료 기준</td></tr>
+          <tr><td class="item">총 주행거리</td><td class="num">500 mi 이상<span class="si">805 km 이상</span></td><td><span class="chip off">공식</span></td><td>목표치, EPA 미인증</td></tr>
+          <tr><td class="item">전기 단독 주행거리</td><td class="num">약 150 mi<span class="si">약 241 km</span></td><td><span class="chip rep">보도</span></td><td>Jeep 엔지니어 발언. Ram REV는 145 mi(233 km)</td></tr>
+          <tr class="group"><td colspan="4">배터리</td></tr>
+          <tr><td class="item">총용량</td><td class="num">92 kWh</td><td><span class="chip off">공식</span></td><td>수랭식</td></tr>
+          <tr><td class="item">가용 용량</td><td class="num">70.8 kWh</td><td><span class="chip ref">참고</span></td><td>Ram 1500 REV 값. 그랜드 왜고니어용은 미공개</td></tr>
+          <tr><td class="item">셀 · 팩 구성</td><td>파우치셀, 병렬 구성, 차체 중앙 배치</td><td><span class="chip off">공식</span></td><td>평평한 바닥과 실내 공간 유지</td></tr>
+          <tr><td class="item">시스템 전압</td><td class="num">400 V</td><td><span class="chip rep">보도</span></td><td>Automotive News</td></tr>
+          <tr><td class="item">DC 급속충전</td><td class="num">최대 175 kW</td><td><span class="chip rep">미확정</span></td><td>출시 전 예고 기사 기준, 공식 미확인. Ram REV는 145 kW</td></tr>
+          <tr><td class="item">AC 완속충전</td><td class="blank">–</td><td></td><td>미공개</td></tr>
+          <tr class="group"><td colspan="4">PE · 레인지 익스텐더</td></tr>
+          <tr><td class="item">구동 모터</td><td>전·후 듀얼 모터 (AWD)</td><td><span class="chip rep">보도</span></td><td>모터별 출력은 미공개</td></tr>
+          <tr><td class="item">모터 출력 (참고)</td><td class="num">전 250 kW / 후 238 kW</td><td><span class="chip ref">참고</span></td><td>Ram 1500 REV(Wikipedia). 그랜드 왜고니어 적용 여부 미확인</td></tr>
+          <tr><td class="item">발전 엔진</td><td>3.6L V6 (Pentastar)</td><td><span class="chip off">공식</span></td><td>배기량·형식은 공식, Pentastar 명칭은 보도</td></tr>
+          <tr><td class="item">발전기</td><td class="num">130 kW</td><td><span class="chip off">공식</span></td><td>엔진 → 발전기 → 배터리·모터</td></tr>
+          <tr><td class="item">연료탱크</td><td class="num">20 gal<span class="si">75.7 L</span></td><td><span class="chip rep">보도</span></td><td>후석 공조 패키징 때문에 Ram REV(27 gal)보다 작음</td></tr>
+          <tr class="group"><td colspan="4">상품 · 가격</td></tr>
+          <tr><td class="item">트림</td><td>Summit, Summit Reserve (+ Summit Obsidian)</td><td><span class="chip rep">보도</span></td><td>표준 휠베이스부터. L(롱휠베이스)은 미정</td></tr>
+          <tr><td class="item">가격 (US MSRP)</td><td class="blank">– (미발표)</td><td></td><td>언론 추정은 $90,000 이상, 일부는 $100,000 안팎</td></tr>
+          <tr><td class="item">생산 공장</td><td>워런 트럭 공장 (미시간), ICE 모델과 혼류</td><td><span class="chip off">공식</span></td><td>전동화 모델 투자 $97.6M (2024년 발표)</td></tr>
+          <tr><td class="item">공차중량</td><td class="blank">–</td><td></td><td>미공개</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>ICE 대비 변경 사항</h2>
+      <p class="note">비교 대상은 2026년형 3.0L Hurricane 트윈터보 직렬 6기통(SO) 모델입니다. ICE 값은 Stellantis 보도자료와 EPA 기준입니다.</p>
+    </div>
+    <div class="bars" aria-label="ICE와 REEV 출력·토크 비교 막대">
+      <div class="bar-set">
+        <h3>최고출력</h3>
+        <div class="bar-row"><span>REEV</span><div class="track"><div class="fill ev" style="width:100%"></div></div><span class="val">647 hp · 482 kW</span></div>
+        <div class="bar-row"><span>ICE</span><div class="track"><div class="fill ice" style="width:64.9%"></div></div><span class="val">420 hp · 313 kW</span></div>
+      </div>
+      <div class="bar-set">
+        <h3>최대토크</h3>
+        <div class="bar-row"><span>REEV</span><div class="track"><div class="fill ev" style="width:100%"></div></div><span class="val">620 lb-ft · 841 N·m</span></div>
+        <div class="bar-row"><span>ICE</span><div class="track"><div class="fill ice" style="width:75.5%"></div></div><span class="val">468 lb-ft · 635 N·m</span></div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>항목</th><th>ICE (3.0L I6 TT)</th><th>REEV</th><th>변화</th></tr></thead>
+        <tbody>
+          <tr><td class="item">구동원</td><td>엔진 → 8단 자동 → 4x2/4x4</td><td>듀얼 전기모터 (AWD)</td><td>엔진은 발전 전용</td></tr>
+          <tr><td class="item">엔진</td><td>3.0L 직렬6 트윈터보 Hurricane</td><td>3.6L V6 + 130 kW 발전기</td><td>엔진 교체</td></tr>
+          <tr><td class="item">최고출력</td><td class="num">420 hp<span class="si">313 kW</span></td><td class="num">647 hp<span class="si">482 kW</span></td><td class="delta">+227 hp (+54%)</td></tr>
+          <tr><td class="item">최대토크</td><td class="num">468 lb-ft<span class="si">635 N·m</span></td><td class="num">620 lb-ft<span class="si">841 N·m</span></td><td class="delta">+152 lb-ft (+32%)</td></tr>
+          <tr><td class="item">0→60 mph</td><td class="blank">–</td><td class="num">약 5.0 s</td><td class="note">ICE 공식값 미확인</td></tr>
+          <tr><td class="item">최대 견인</td><td class="num">10,000 lb<span class="si">4,536 kg</span></td><td class="num">10,000 lb<span class="si">4,536 kg</span></td><td class="note">동일 (REEV는 보도 기준)</td></tr>
+          <tr><td class="item">연비 · 전비</td><td class="num">18 mpg (4WD, EPA)<span class="si">13.1 L/100km</span></td><td class="blank">– (EPA 미인증)</td><td class="note">전기 주행 약 150 mi</td></tr>
+          <tr><td class="item">배터리</td><td class="blank">없음</td><td class="num">92 kWh</td><td class="note">바닥 중앙 배치, 실내 바닥은 평평하게 유지</td></tr>
+          <tr><td class="item">트림 구성</td><td>Grand Wagoneer, Limited Altitude, Summit Obsidian 등</td><td>Summit 계열만</td><td class="note">최상위 트림 전용</td></tr>
+          <tr><td class="item">시작가 (US MSRP)</td><td class="num">$62,145<span class="si">4x2, 배송비 $2,595 별도</span></td><td class="blank">– (미발표)</td><td class="note">ICE Summit Obsidian $93,390</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>차체 치수 (ICE 기준)</h2>
+      <p class="note">REEV 전용 치수는 공개되지 않았습니다. 아래는 2026년형 ICE 표준 휠베이스 모델의 매체 표기이며, 매체마다 값이 달라 범위로 적었습니다. 공식 제원표는 자동 수집이 되지 않아 반영하지 못했습니다.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>항목</th><th>값 (in)</th><th>SI</th><th>근거</th></tr></thead>
+        <tbody>
+          <tr><td class="item">전장</td><td class="num">214.7 ~ 216.1</td><td class="num">5,453 ~ 5,489 mm</td><td><span class="chip rep">보도</span> Autoblog / J.D. Power</td></tr>
+          <tr><td class="item">전폭 (미러 제외)</td><td class="num">83.6</td><td class="num">2,123 mm</td><td><span class="chip rep">보도</span></td></tr>
+          <tr><td class="item">전고</td><td class="num">75.6 ~ 79.8</td><td class="num">1,920 ~ 2,027 mm</td><td><span class="chip rep">보도</span> 매체 간 차이가 큼</td></tr>
+          <tr><td class="item">휠베이스</td><td class="num">123</td><td class="num">3,124 mm</td><td><span class="chip rep">보도</span> L 모델은 130 in (3,302 mm)</td></tr>
+          <tr><td class="item">최저지상고</td><td class="num">8.4 / 10.1 (에어서스펜션)</td><td class="num">213 / 257 mm</td><td><span class="chip rep">보도</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">전장 5,453~5,489mm로 모니터링 범위(4,800~5,800mm) 안에 들어가는 BOF SUV입니다.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>현대차그룹 관점 시사점</h2>
+    </div>
+    <ul class="insights">
+      <li><b>BOF 대형 SUV에서 전동화를 푸는 방식</b><span>순수 전기차 대신 엔진을 발전기로만 쓰는 REEV를 택했습니다. 견인(10,000lb)과 장거리(500mi 이상) 요구를 유지하면서 일상 주행은 전기로 해결하는 방식입니다. 현대차그룹이 개발 중인 BOF 픽업·SUV 플랫폼의 전동화 방향을 정할 때 비교 기준이 됩니다.</span></li>
+      <li><b>출력 경쟁</b><span>REEV 647hp(482kW)는 GV90의 490kW와 비슷한 수준입니다. 대형 럭셔리 SUV에서 전동화 구동계가 출력 우위를 가져가는 흐름입니다.</span></li>
+      <li><b>원가와 가격 포지션</b><span>REEV를 최상위 Summit 트림에만 넣었습니다. 배터리 원가를 가격이 높은 트림에서 흡수하려는 구성으로 보입니다. 공식 가격이 나오면 GV90 미국 가격대와 비교가 필요합니다.</span></li>
+      <li><b>일정 리스크</b><span>400V 배터리·모터 통합 문제로 생산이 최소 6개월 늦어졌다는 보도가 있습니다. 같은 파워트레인을 쓰는 Ram 1500 REV도 2027년 4월로 밀렸습니다.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>출처</h2></div>
+    <ul class="sources">
+      <li><span class="chip off">공식</span><a href="https://media.stellantisnorthamerica.com/newsrelease.do?id=27102&amp;mid=1541" target="_blank" rel="noopener">Stellantis Media – New 2026 Jeep Grand Wagoneer (REEV 사양, ICE 가격·출력)</a></li>
+      <li><span class="chip off">공식</span><a href="https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&amp;path=1&amp;year1=2026&amp;year2=2027&amp;make=Jeep&amp;baseModel=Grand%20Wagoneer&amp;srchtyp=ymm" target="_blank" rel="noopener">EPA fueleconomy.gov – Grand Wagoneer 연비</a></li>
+      <li><span class="chip rep">보도</span><a href="https://www.autonews.com/stellantis/an-stellantis-erev-jeep-ram-launches-0903/" target="_blank" rel="noopener">Automotive News – Jeep, Ram EREVs get new launch dates (2026-09)</a></li>
+      <li><span class="chip rep">보도</span><a href="https://www.motor1.com/news/807964/jeep-ram-erev-delays-reshape/" target="_blank" rel="noopener">Motor1 – Stellantis Delays Its Two Most Important Electrified Jeeps And Rams Again</a></li>
+      <li><span class="chip rep">보도</span><a href="https://gmauthority.com/blog/2026/09/ram-1500-rev-jeep-grand-wagoneer-erev-launches-delayed/" target="_blank" rel="noopener">GM Authority – Ram 1500 REV, Jeep Grand Wagoneer EREV Launches Delayed</a></li>
+      <li><span class="chip rep">보도</span><a href="https://moparinsiders.com/dealers-can-now-order-the-2027-jeep-grand-wagoneer-rev/" target="_blank" rel="noopener">MoparInsiders – Dealers Can Now Order The 2027 Jeep Grand Wagoneer REV</a></li>
+      <li><span class="chip rep">보도</span><a href="https://moparinsiders.com/jeep-drops-more-details-on-the-upcoming-grand-wagoneer-reev/" target="_blank" rel="noopener">MoparInsiders – Jeep Drops More Details on the Upcoming Grand Wagoneer REEV (연료탱크·주행거리·견인)</a></li>
+      <li><span class="chip rep">보도</span><a href="https://www.edmunds.com/car-news/2026-jeep-grand-wagoneer-debut-first-look.html" target="_blank" rel="noopener">Edmunds – 2026 Jeep Grand Wagoneer First Look</a></li>
+      <li><span class="chip rep">보도</span><a href="https://www.kbb.com/car-news/jeeps-2026-grand-wagoneer-news-isnt-the-refresh-its-the-reev/" target="_blank" rel="noopener">Kelley Blue Book – The Real Grand Wagoneer News Is the REEV</a></li>
+      <li><span class="chip rep">보도</span><a href="https://www.capitalone.com/cars/overview/jeep/grand-wagoneer/2027" target="_blank" rel="noopener">Capital One Auto – 2027 Grand Wagoneer (REV 트림 목록)</a></li>
+      <li><span class="chip rep">보도</span><a href="https://www.autoblog.com/cars/jeep/grand-wagoneer/2026" target="_blank" rel="noopener">Autoblog – 2026 Grand Wagoneer 제원</a> · <a href="https://www.jdpower.com/cars/2026/jeep/grand-wagoneer/limited-altitude-4x4/specs" target="_blank" rel="noopener">J.D. Power – Limited Altitude 4x4 제원</a></li>
+      <li><span class="chip ref">참고</span><a href="https://en.wikipedia.org/wiki/Ram_1500_REV" target="_blank" rel="noopener">Wikipedia – Ram 1500 REV (모터 출력, 가용 배터리, 충전)</a></li>
+    </ul>
+  </section>
+
+  <footer>공식 수치는 Stellantis 발표 기준 추정치(estimated)이며 EPA 인증 전입니다. 보도·참고 값은 공식 발표가 나오면 바뀔 수 있습니다. 단위 환산: 1 hp = 0.7457 kW, 1 lb-ft = 1.3558 N·m, 1 mi = 1.609 km, 1 gal = 3.785 L, 1 lb = 0.4536 kg.</footer>
+</div>
