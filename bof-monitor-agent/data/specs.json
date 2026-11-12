@@ -372,6 +372,30 @@
     "tier": 1,
     "fetched_at": "2026-11-11",
     "quote": "AUTOGRAPH 4WD STARTING MSRP $113,685"
+   },
+   "towing": {
+    "value": 8500,
+    "unit": "lb",
+    "source_url": "https://usa.infinitinews.com/en-US/releases/release-a77049adf644bacfdd39eebc9101e427-2027-infiniti-qx80-brings-commanding-presence-powerful-technology-and-first-class-comforton-sale-from-85590",
+    "tier": 2,
+    "fetched_at": "2026-11-13",
+    "quote": "QX80 has a standard towing rating of 8,500 pounds when properly equipped"
+   },
+   "drivetrain": {
+    "value": "RWD / 4WD",
+    "unit": null,
+    "source_url": "https://usa.infinitinews.com/en-US/releases/release-a77049adf644bacfdd39eebc9101e427-2027-infiniti-qx80-brings-commanding-presence-powerful-technology-and-first-class-comforton-sale-from-85590",
+    "tier": 2,
+    "fetched_at": "2026-11-13",
+    "quote": "PURE and LUXE with a choice between rear-wheel drive and INFINITI All-Mode 4-Wheel Drive"
+   },
+   "seats": {
+    "value": 8,
+    "unit": "seats",
+    "source_url": "https://usa.infinitinews.com/en-US/releases/release-a77049adf644bacfdd39eebc9101e427-2027-infiniti-qx80-brings-commanding-presence-powerful-technology-and-first-class-comforton-sale-from-85590",
+    "tier": 2,
+    "fetched_at": "2026-11-13",
+    "quote": "raising maximum seating capacity to eight"
    }
   }
  },

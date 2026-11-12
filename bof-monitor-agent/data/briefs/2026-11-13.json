@@ -1,0 +1,32 @@
+{
+ "date": "2026-11-13",
+ "headlines": [
+  "신규 주요 이슈 없음 (중요도 70점 이상 0건)",
+  "Infiniti QX80 공식 견인력·구동방식 보완 (8,500lb · RWD/4WD)",
+  "참고: 제네시스 GV60 마그마 AUTO BILD 수상 · 中 토요타 프라도/GX 하이브리드 리콜"
+ ],
+ "issues": [],
+ "comparisons": [
+  {
+   "title": "GV90 vs BOF 럭셔리 풀사이즈 SUV",
+   "target": "genesis_gv90",
+   "hmg": [
+    "genesis_gv80"
+   ],
+   "rivals": [
+    "cadillac_escalade",
+    "lincoln_navigator",
+    "lexus_lx",
+    "infiniti_qx80",
+    "jeep_grand_wagoneer"
+   ],
+   "reason": "미국 럭셔리 풀사이즈 3열 SUV(BOF) 주력 5종 · GV90은 모노코크 EV, 경쟁차는 BOF 내연기관 · 현대차그룹 슬롯은 GV80"
+  }
+ ],
+ "insights": [
+  "지난 24시간 동안 중요도 70점 이상 공식 발표는 없었다. 70점 미만 참고 항목 2건은 아래와 같다.",
+  "제네시스 GV60 마그마가 독일 AUTO BILD·BILD am SONNTAG 상을 받았다(11/11, 제네시스 뉴스룸) — 수상 소식이라 신차·신기술 기준에는 미달(45점).",
+  "중국에서 토요타 랜드크루저 프라도 하이브리드 47,347대와 렉서스 GX 550h 8,130대가 연료라인 커넥터 문제로 리콜됐다(보도). 미국 랜드크루저의 10월 연료 튜브 리콜(26V673)과 같은 계통인지는 확인되지 않았다(60점).",
+  "QX80 2027년형 공식 보도자료 기준 견인력 8,500lb로, 비교군 BOF 중 Grand Wagoneer(10,000lb) 다음이고 LX(8,000lb)보다 높다."
+ ]
+}
